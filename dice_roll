@@ -1,0 +1,44 @@
+import random
+import os 
+
+def number_die():
+    while True:
+        try:
+            number_dice = input("Please import the number of dice in which you are using (1-2): ")
+            allowed_responses = ['1' , 'one' , '2' , 'two']    
+            if number_dice not in allowed_responses:
+                raise ValueError('1 or 2 only allowed')
+            else:
+                return number_dice
+        except ValueError as err:
+            print(err)
+            
+def roll_the_dice():
+    minimum_value = 1
+    maximum_value = 6
+    roll_again = 'y'
+    
+    while roll_again.lower() == 'yes' or roll_again.lower() == 'y':
+        os.system('cls' if os.name == 'nt' else 'clear')
+        amount = number_die()
+        
+        if amount == '2' or amount == 'two':
+            print("Rolling your dice! Please wait.")
+            dice_1 = random.randint(minimum_value, maximum_value)
+            dice_2 = random.randint(minimum_value, maximum_value)
+            
+            print("Your values are: ")
+            print("Dice One: ", dice_1)
+            print("Dice Two: ", dice_2)
+            print("Total: ", dice_1 + dice_2)
+            
+            roll_again = input("Would you like to roll again? ")
+        else: 
+            print("Rolling your die! Please wait.")
+            dice_1 = random.randint(minimum_value, maximum_value)
+            print(f"The value of your die is: {dice_1} ")
+            
+            roll_again = input("Would you like to roll again? ")
+
+if __name__ == '__main__':
+   roll_the_dice()
